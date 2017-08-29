@@ -1,0 +1,1 @@
+Open project with jMonkeyEngine SDK 3.0, read comments from Workplace class
