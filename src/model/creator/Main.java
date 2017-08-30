@@ -4,6 +4,8 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
+import com.jme3.post.FilterPostProcessor;
+import com.jme3.post.filters.CartoonEdgeFilter;
 import com.jme3.renderer.RenderManager;
 import com.jme3.system.AppSettings;
 import model.creator.graphics.GeometryAnimationManager;
@@ -51,9 +53,17 @@ public class Main extends SimpleApplication {
     public void runAnimation(){
         
     }
+    
+    private void setToonShader(){
+        viewPort.setBackgroundColor(ColorRGBA.Blue);
+        FilterPostProcessor fpp=new FilterPostProcessor(assetManager);
+        fpp.addFilter(new CartoonEdgeFilter());
+        viewPort.addProcessor(fpp);
+    }
 
     @Override
     public void simpleInitApp() {
+        if (Settings.useToonShader) setToonShader();
         StaticAssetManager.setAssetManager(assetManager);
         flyCam.setMoveSpeed(Settings.cameraMoveSpeed);
         AmbientLight allLight = new AmbientLight();
