@@ -37,6 +37,7 @@ public class MeshRender {
         normalDataBuffer = (FloatBuffer) normalVertexBuffer.getData();
         colorVertexBuffer = mesh.getBuffer(VertexBuffer.Type.Color);
         colorDataBuffer = (FloatBuffer) colorVertexBuffer.getData();
+        
 
         fillIndexBuffer();
         return mesh;
@@ -74,29 +75,29 @@ public class MeshRender {
                     if (polygon.isUpdating(time)) {
                         float changeAmount = (time - polygon.getDelay()) / (float) polygon.getDuration();
                         changeAmount = FastMath.clamp(changeAmount, 0f, 1f);
+                        if (polygon.isDone(time)) changeAmount = 1;
 
                         Vector3f[] middleTriangle = getMiddleTriangle(polygon, changeAmount);
                         Vector3f normalVector = getPolygonNormalVector(middleTriangle);
                         ColorRGBA middleColor = getMiddleColor(polygon, changeAmount);
-                        System.out.println(middleColor);
 
                         for (int i = 0; i < 3; i++) {
-                            positionDataBuffer.put(index * 3 + i * 3, middleTriangle[i].getX());
-                            positionDataBuffer.put(index * 3 + i * 3 + 1, middleTriangle[i].getY());
-                            positionDataBuffer.put(index * 3 + i * 3 + 2, middleTriangle[i].getZ());
+                            positionDataBuffer.put(index * 9 + i * 3, middleTriangle[i].getX());
+                            positionDataBuffer.put(index * 9 + i * 3 + 1, middleTriangle[i].getY());
+                            positionDataBuffer.put(index * 9 + i * 3 + 2, middleTriangle[i].getZ());
 
-                            normalDataBuffer.put(index * 3 + i * 3, normalVector.getX());
-                            normalDataBuffer.put(index * 3 + i * 3 + 1, normalVector.getY());
-                            normalDataBuffer.put(index * 3 + i * 3 + 2, normalVector.getZ());
+                            normalDataBuffer.put(index * 9 + i * 3, normalVector.getX());
+                            normalDataBuffer.put(index * 9 + i * 3 + 1, normalVector.getY());
+                            normalDataBuffer.put(index * 9 + i * 3 + 2, normalVector.getZ());
 
-                            colorDataBuffer.put(index*3+i*4, middleColor.getRed());
-                            colorDataBuffer.put(index*3+i*4+1, middleColor.getGreen());
-                            colorDataBuffer.put(index*3+i*4+2, middleColor.getBlue());
-                            colorDataBuffer.put(index*3+i*4+3, middleColor.getAlpha());
+                            colorDataBuffer.put(index*12+i*4, middleColor.getRed());
+                            colorDataBuffer.put(index*12+i*4+1, middleColor.getGreen());
+                            colorDataBuffer.put(index*12+i*4+2, middleColor.getBlue());
+                            colorDataBuffer.put(index*12+i*4+3, middleColor.getAlpha());
                         }
                     }
                 }
-                index += 3;
+                index++;
             }
             positionVertexBuffer.setUpdateNeeded();
             normalVertexBuffer.setUpdateNeeded();
@@ -106,8 +107,31 @@ public class MeshRender {
             if (allDone) {
                 done = true;
                 animationStart = ANIMATION_DISABLED;
+                polyAnimation.reset();
+                //debug();
             }
         }
+    }
+    
+    private void debug(){
+        short[] indexes = new short[indexDataBuffer.capacity()];
+        float[] positions = new float[positionDataBuffer.capacity()];
+        float[] normals = new float[normalDataBuffer.capacity()];
+        float[] colors = new float[colorDataBuffer.capacity()];
+       
+        for (int i = 0; i < indexes.length; i++){
+            indexes[i] = indexDataBuffer.get(i);
+        }
+        for (int i = 0; i < positions.length; i++){
+            positions[i] = positionDataBuffer.get(i);
+        }for (int i = 0; i < normals.length; i++){
+            normals[i] = normalDataBuffer.get(i);
+        }
+        for (int i = 0; i < colors.length; i++){
+            colors[i] = colorDataBuffer.get(i);
+        }
+        colors.clone();
+        
     }
 
     private ColorRGBA getMiddleColor(Polygon polygon, float changeAmount) {
@@ -150,4 +174,5 @@ public class MeshRender {
     public void beginAnimation() {
         animationStart = System.currentTimeMillis();
     }
+
 }
