@@ -3,15 +3,19 @@ package model.creator;
 import com.jme3.app.SimpleApplication;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
+import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.post.filters.CartoonEdgeFilter;
 import com.jme3.renderer.RenderManager;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.debug.Grid;
 import com.jme3.system.AppSettings;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.concurrent.Callable;
 import model.creator.graphics.GeometryAnimationManager;
 import model.creator.graphics.GeometryManager;
 import model.creator.graphics.Model;
@@ -45,6 +49,16 @@ public class Main extends SimpleApplication {
         this.setSettings(cfg);
     }
     
+    private void attachGrid(Vector3f pos, int size, ColorRGBA color){
+        Geometry g = new Geometry("wireframe grid", new Grid(size, size, 0.5f) );
+        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        mat.getAdditionalRenderState().setWireframe(true);
+        mat.setColor("Color", color);
+        g.setMaterial(mat);
+        g.center().move(pos);
+        rootNode.attachChild(g);
+    }
+    
     public Model createModel(){
         return null;
     }
@@ -67,6 +81,7 @@ public class Main extends SimpleApplication {
     private DirectionalLight light;
     @Override
     public void simpleInitApp() {
+        attachGrid(Vector3f.ZERO, 100, ColorRGBA.Blue);
         if (Settings.useToonShader) setToonShader();
         StaticAssetManager.setAssetManager(assetManager);
         flyCam.setMoveSpeed(Settings.cameraMoveSpeed);
@@ -84,6 +99,11 @@ public class Main extends SimpleApplication {
             geometryAnimationManager = new GeometryAnimationManager(model);
             rootNode.attachChild(geometryAnimationManager);
         }
+        /*cam.setParallelProjection(false);
+        float aspect = 1.77777f;
+        float size   = 2f;
+        cam.setFrustum(1f, 1000, -aspect * size, aspect * size, size, -size);
+        cam.setLocation(new Vector3f(10,10,10));*/
         runAnimation();
     }
 
@@ -91,6 +111,7 @@ public class Main extends SimpleApplication {
     public void simpleUpdate(float tpf) {
         light.setDirection(cam.getDirection());
         geometryAnimationManager.onUpdate();
+        if (Settings.rotateModel)
         geometryAnimationManager.rotate(0, tpf/4, 0);
     }
 
@@ -104,7 +125,13 @@ public class Main extends SimpleApplication {
             public void run() {
                 try{
                     Thread.sleep(delay);
-                    geometryAnimationManager.beginAnimation(animationName);
+                    enqueue(new Callable<Integer>() {
+
+                        public Integer call() throws Exception {
+                            geometryAnimationManager.beginAnimation(animationName);
+                            return 1;
+                        }
+                    });
                 } catch (Exception e){
                     
                 }

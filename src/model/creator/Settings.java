@@ -13,4 +13,5 @@ public class Settings {
     public static boolean showDetails = true;
     public static float cameraMoveSpeed = 5;
     public static boolean useToonShader = false;
+    public static boolean rotateModel = false;
 }
