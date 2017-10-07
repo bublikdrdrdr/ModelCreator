@@ -36,7 +36,7 @@ public class TerrainModel extends Model{
     };
     
     float b = 256;
-    
+    long dur = 200;
     ColorRGBA[] colors = new ColorRGBA[]{
         new ColorRGBA(118/b, 164/b, 65/b, 1),
         new ColorRGBA(93/b, 145/b, 63/b, 1),
@@ -48,27 +48,27 @@ public class TerrainModel extends Model{
     public TerrainModel() {
         PolyAnimation buildAnimation = new PolyAnimation("build");
         
-        long dur = 1000;
+        
         Polygon[] buildPolygons = new Polygon[]{
-            p(0, 1, 1, 0, 3, 1, dur, 0),
+            p(0, 1, 1, 0, 3, 1, dur, d(2)),
             p(1,2,2,1,5,2, dur, 0),
-            p(3,1,1,3,5,1, dur, 0),
-            p(5,3,3,5,3,7, dur, 0),
-            p(4,7,7,4,7,3, dur, 0),
-            p(4,3,3,4,3,0, dur, 0),
+            p(3,1,1,3,5,1, dur, d(2)),
+            p(5,3,3,5,3,7, dur, d(3)),
+            p(4,7,7,4,7,3, dur, d(1)),
+            p(4,3,3,4,3,0, dur, d(4)),
             p(0,6,6,0,6,4, dur, 0),
-            p(7,9,9,7,9,5, dur, 0),
-            p(5,9,9,5,9,2, dur, 0),
-            p(7,4,4,7,4,8, dur, 0),
-            p(6,8,8,6,8,4, dur, 0),
-            p(6,11,11,6,11,8, dur, 0),
+            p(7,9,9,7,9,5, dur, d(1)),
+            p(5,9,9,5,9,2, dur, d(2)),
+            p(7,4,4,7,4,8, dur, d(1)),
+            p(6,8,8,6,8,4, dur, d(2)),
+            p(6,11,11,6,11,8, dur, d(3)),
             p(11,12,12,11,12,8, dur, 0),
-            p(8,10,10,8,10,7, dur, 0),
-            p(7,10,10,7,10,9, dur, 0),
+            p(8,10,10,8,10,7, dur, d(4)),
+            p(7,10,10,7,10,9, dur, d(4)),
             p(14,9,9,14,9,10, dur, 0),
-            p(10,13,13,10,13,14, dur, 0),
-            p(8,12,12,8,12,10, dur, 0),
-            p(10,12,12,10,12,13, dur, 0),
+            p(10,13,13,10,13,14, dur, d(3)),
+            p(8,12,12,8,12,10, dur, d(1)),
+            p(10,12,12,10,12,13, dur, d(2)),
             
         };
         
@@ -84,6 +84,10 @@ public class TerrainModel extends Model{
     
     private Vector3f v(int index){
         return points[index];
+    }
+    
+    private long d(int mult){
+        return dur*mult;
     }
     
     

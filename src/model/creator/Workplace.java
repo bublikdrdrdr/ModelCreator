@@ -35,7 +35,7 @@ public class Workplace extends Main{
 
     @Override
     public void runAnimation() {
-        runAnimationAfter("build", 0);
+        runAnimationAfter("build", 1000);
         /*runAnimationAfter("stage1", 9000);
         runAnimationAfter("stage2", 10000);
         runAnimationAfter("stage1", 11000);
