@@ -12,6 +12,7 @@ import model.creator.graphics.Model;
 import model.creator.graphics.PolyAnimation;
 import model.creator.graphics.Polygon;
 import model.creator.models.SimpleModel;
+import model.creator.models.TerrainModel;
 import model.creator.models.TreeModel;
 
 /**
@@ -27,7 +28,7 @@ public class Workplace extends Main{
     @Override
     public Model createModel() {
         //TODO: create model manager, return it in this method and run project to see result
-        Model model = new TreeModel();
+        Model model = new TerrainModel();
         saveFile(model);
         return model;
     }
@@ -35,14 +36,14 @@ public class Workplace extends Main{
     @Override
     public void runAnimation() {
         runAnimationAfter("build", 0);
-        runAnimationAfter("stage1", 9000);
+        /*runAnimationAfter("stage1", 9000);
         runAnimationAfter("stage2", 10000);
         runAnimationAfter("stage1", 11000);
         runAnimationAfter("stage2", 12000);
         runAnimationAfter("stage1", 13000);
         runAnimationAfter("stage2", 14000);
         runAnimationAfter("stage1", 15000);
-        runAnimationAfter("stage2", 16000);
+        runAnimationAfter("stage2", 16000);*/
         
         /*runAnimationAfter("build", 0);
         runAnimationAfter("stage1", 9000);

@@ -91,7 +91,7 @@ public class Main extends SimpleApplication {
         allLight.setColor(ColorRGBA.Gray);
         rootNode.addLight(allLight);
         light = new DirectionalLight();
-        light.setColor(ColorRGBA.White.mult(2f));
+        light.setColor(ColorRGBA.White.mult(1f));
         light.setDirection(getCamera().getDirection());
         rootNode.addLight(light);
         Model model = createModel();
