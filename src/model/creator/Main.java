@@ -40,8 +40,8 @@ public class Main extends SimpleApplication {
         this.setDisplayFps(Settings.showDetails);
         this.setDisplayStatView(Settings.showDetails);
         AppSettings cfg = new AppSettings(true);
-        cfg.setVSync(true);  
-        cfg.setFrequency(60); 
+        cfg.setVSync(Settings.vSynch);  
+        //cfg.setFrequency(60); 
         cfg.setResolution(1024, 768);   
         cfg.setFullscreen(false); 
         cfg.setSamples(16);

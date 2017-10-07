@@ -28,17 +28,25 @@ public class Workplace extends Main{
     public Model createModel() {
         //TODO: create model manager, return it in this method and run project to see result
         Model model = new TreeModel();
-        //saveFile(model);
+        saveFile(model);
         return model;
     }
 
     @Override
     public void runAnimation() {
-        /*runAnimationAfter("build", 0);
-        runAnimationAfter("destroy1", 9000);*/
         runAnimationAfter("build", 0);
         runAnimationAfter("stage1", 9000);
-        runAnimationAfter("destroy2", 10000);
+        runAnimationAfter("stage2", 10000);
+        runAnimationAfter("stage1", 11000);
+        runAnimationAfter("stage2", 12000);
+        runAnimationAfter("stage1", 13000);
+        runAnimationAfter("stage2", 14000);
+        runAnimationAfter("stage1", 15000);
+        runAnimationAfter("stage2", 16000);
+        
+        /*runAnimationAfter("build", 0);
+        runAnimationAfter("stage1", 9000);
+        runAnimationAfter("destroy2", 10000);*/
         /*runAnimationAfter("build_lvl_1", 0);
         runAnimationAfter("upgrade_lvl_2", 2000);
         runAnimationAfter("downgrade_lvl_1", 4000);

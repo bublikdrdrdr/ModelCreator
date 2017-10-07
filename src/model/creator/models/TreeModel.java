@@ -56,7 +56,7 @@ public class TreeModel extends Model{
         
         
         float b = 256f;
-        long dur = 1000;
+        long dur = 200;
         ColorRGBA[] colors = new ColorRGBA[]{
             new ColorRGBA(124/b,62/b,0,1f),
             new ColorRGBA(0,217/b, 0,1),
@@ -110,27 +110,28 @@ public class TreeModel extends Model{
         };
         
         
+        int durMult = 5;
         Polygon[] stage1Polygons = new Polygon[buildPolygons.length];
         for (int i = 0; i < stage1Polygons.length; i++){
             if (i >= 7){
                 if (i%3==0)
-            stage1Polygons[i] = new Polygon(colors[1], colors[2], buildPolygons[i].getEndPoints(), buildPolygons[i].getEndPoints(), buildPolygons[i].getDuration(), 0);
+            stage1Polygons[i] = new Polygon(colors[1], colors[2], buildPolygons[i].getEndPoints(), buildPolygons[i].getEndPoints(), buildPolygons[i].getDuration()*durMult, 0);
                 else
-                    stage1Polygons[i] = new Polygon(colors[1], colors[3], buildPolygons[i].getEndPoints(), buildPolygons[i].getEndPoints(), buildPolygons[i].getDuration(), 0);
+                    stage1Polygons[i] = new Polygon(colors[1], colors[3], buildPolygons[i].getEndPoints(), buildPolygons[i].getEndPoints(), buildPolygons[i].getDuration()*durMult, 0);
             }
             else
-                stage1Polygons[i] = new Polygon(colors[0], colors[0], buildPolygons[i].getEndPoints(), buildPolygons[i].getEndPoints(), buildPolygons[i].getDuration(), 0);
+                stage1Polygons[i] = new Polygon(colors[0], colors[0], buildPolygons[i].getEndPoints(), buildPolygons[i].getEndPoints(), 0, 0);
         }
         
         Polygon[] stage2Polygons = new Polygon[buildPolygons.length];
         for (int i = 0; i < stage2Polygons.length; i++){
             if (i >=7){
                 if (i%3==0)
-            stage2Polygons[i] = new Polygon(colors[2], colors[1], buildPolygons[i].getEndPoints(), buildPolygons[i].getEndPoints(), buildPolygons[i].getDuration(), 0);
+            stage2Polygons[i] = new Polygon(colors[2], colors[1], buildPolygons[i].getEndPoints(), buildPolygons[i].getEndPoints(), buildPolygons[i].getDuration()*durMult, 0);
             else
-                 stage2Polygons[i] = new Polygon(colors[3], colors[1], buildPolygons[i].getEndPoints(), buildPolygons[i].getEndPoints(), buildPolygons[i].getDuration(), 0);   
+                 stage2Polygons[i] = new Polygon(colors[3], colors[1], buildPolygons[i].getEndPoints(), buildPolygons[i].getEndPoints(), buildPolygons[i].getDuration()*durMult, 0);   
             }else
-                stage2Polygons[i] = new Polygon(colors[0], colors[0], buildPolygons[i].getEndPoints(), buildPolygons[i].getEndPoints(), buildPolygons[i].getDuration(), 0);
+                stage2Polygons[i] = new Polygon(colors[0], colors[0], buildPolygons[i].getEndPoints(), buildPolygons[i].getEndPoints(), 0, 0);
         }
         
         Polygon[] destroy1Polygons = new Polygon[buildPolygons.length];
