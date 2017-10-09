@@ -73,11 +73,13 @@ public class RoadModel extends Model{
         PolyAnimation buildTurnAnimation = new PolyAnimation("buildTurn");
         PolyAnimation buildTripleAnimation = new PolyAnimation("buildTriple");
         PolyAnimation buildQuadripleAnimation = new PolyAnimation("buildQuadriple");
+        PolyAnimation buildLoneAnimation = new PolyAnimation("buildLone");
         PolyAnimation destroyStraightAnimation = new PolyAnimation("destroyStraight");
         PolyAnimation destroyEndAnimation = new PolyAnimation("destroyEnd");
         PolyAnimation destroyTurnAnimation = new PolyAnimation("destroyTurn");
         PolyAnimation destroyTripleAnimation = new PolyAnimation("destroyTriple");
         PolyAnimation destroyQuadripleAnimation = new PolyAnimation("destroyQuadriple");
+        PolyAnimation destroyLoneAnimation = new PolyAnimation("destroyLone");
         
         
         Polygon[] buildPolygons = new Polygon[]{
@@ -154,6 +156,27 @@ public class RoadModel extends Model{
             p(24, 26, 26, 24, 26, 16, dur, d(3), 1),
             p(16, 26, 26, 16, 26, 27, dur, d(3), 1),
             //end quadriple
+            
+            //start lone
+            p(0, 23, 23, 0, 23, 24, dur, d(1), 0),
+            p(0, 24, 24, 0, 24, 1, dur, d(1), 0),
+            p(4, 16, 16, 4, 16, 5, dur, d(1), 0),
+            p(5, 16, 16, 5, 16, 17, dur, d(1), 0),
+            p(25, 2, 2, 25, 2, 26, dur, d(1), 0),
+            p(26, 2, 2, 26, 2, 3, dur, d(1), 0),
+            p(27, 6, 6, 27, 6, 7, dur, d(1), 0),
+            p(27, 7, 7, 27, 7, 20, dur, d(1), 0),
+            p(1, 24, 24, 1, 24, 4, dur, d(2), 0),
+            p(4, 24, 24, 4, 24, 16, dur, d(2), 0),
+            p(23, 25, 25, 23, 25, 24, dur, d(2), 0),
+            p(24, 25, 25, 24, 25, 26, dur, d(2), 0),
+            p(26, 3, 3, 26, 3, 27, dur, d(2), 0),
+            p(27, 3, 3, 27, 3, 6, dur, d(2), 0),
+            p(16, 27, 27, 16, 27, 17, dur, d(2), 0),
+            p(17, 27, 27, 17, 27, 20, dur, d(2), 0),
+            p(24, 26, 26, 24, 26, 16, dur, d(3), 1),
+            p(16, 26, 26, 16, 26, 27, dur, d(3), 1),
+            //end lone
         };
         
         for (int i = 0; i < 6; i++){
@@ -237,6 +260,22 @@ public class RoadModel extends Model{
         
         for (Polygon polygon: destroyQuadriplePolygons) destroyQuadripleAnimation.addPolygon(polygon);
         addAnimation(destroyQuadripleAnimation);
+        
+        for (int i = 58; i < 76; i++){
+            buildLoneAnimation.addPolygon(buildPolygons[i]);
+        }
+        addAnimation(buildLoneAnimation);
+        
+        Polygon[] destroyLonePolygons = new Polygon[18];
+        j = 58;
+        for (int i = 0; i < 18; i++){
+            destroyLonePolygons[i] = new Polygon(buildPolygons[j].getStartColor(),
+                    buildPolygons[j].getEndColor(), buildPolygons[j].getEndPoints(), buildPolygons[j].getStartPoints(), dur, dur*7-buildPolygons[j].getDelay());
+            j++;
+        }
+        
+        for (Polygon polygon: destroyLonePolygons) destroyLoneAnimation.addPolygon(polygon);
+        addAnimation(destroyLoneAnimation);
     }
     
     

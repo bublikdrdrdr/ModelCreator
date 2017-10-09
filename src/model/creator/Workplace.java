@@ -36,9 +36,11 @@ public class Workplace extends Main{
 
     @Override
     public void runAnimation() {
-        runAnimationAfter("buildStraight", 1000);
-        runAnimationAfter("destroyStraight", 3000);
-        /*runAnimationAfter("buildEnd", 1000);
+        runAnimationAfter("buildLone", 1000);
+        //runAnimationAfter("destroyLone", 2000);
+        /*runAnimationAfter("buildStraight", 1000);
+        runAnimationAfter("destroyStraight", 2000);
+        runAnimationAfter("buildEnd", 1000);
         runAnimationAfter("destroyEnd", 2000);
         runAnimationAfter("buildTurn", 1000);
         runAnimationAfter("destroyTurn", 2000);
@@ -46,7 +48,7 @@ public class Workplace extends Main{
         runAnimationAfter("destroyTriple", 2000);
         runAnimationAfter("buildQuadriple", 1000);
         runAnimationAfter("destroyQuadriple", 2000);
-        /*runAnimationAfter("stage1", 9000);
+        runAnimationAfter("stage1", 9000);
         runAnimationAfter("stage2", 10000);
         runAnimationAfter("stage1", 11000);
         runAnimationAfter("stage2", 12000);
