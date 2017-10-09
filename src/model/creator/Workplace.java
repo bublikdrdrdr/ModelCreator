@@ -38,8 +38,8 @@ public class Workplace extends Main{
     public void runAnimation() {
         runAnimationAfter("buildLone", 1000);
         //runAnimationAfter("destroyLone", 2000);
-        /*runAnimationAfter("buildStraight", 1000);
-        runAnimationAfter("destroyStraight", 2000);
+        //runAnimationAfter("buildStraight", 1000);
+        /*runAnimationAfter("destroyStraight", 2000);
         runAnimationAfter("buildEnd", 1000);
         runAnimationAfter("destroyEnd", 2000);
         runAnimationAfter("buildTurn", 1000);
