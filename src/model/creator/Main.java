@@ -85,7 +85,7 @@ public class Main extends SimpleApplication {
         if (Settings.useToonShader) setToonShader();
         StaticAssetManager.setAssetManager(assetManager);
         flyCam.setMoveSpeed(Settings.cameraMoveSpeed);
-        cam.setLocation(new Vector3f(3,3,3));
+        cam.setLocation(new Vector3f(10,20,10));
         cam.lookAt(Vector3f.ZERO, Vector3f.UNIT_Y);
         AmbientLight allLight = new AmbientLight();
         allLight.setColor(ColorRGBA.Gray);

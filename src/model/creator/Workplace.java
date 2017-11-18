@@ -11,6 +11,7 @@ import model.creator.graphics.GeometryAnimationManager;
 import model.creator.graphics.Model;
 import model.creator.graphics.PolyAnimation;
 import model.creator.graphics.Polygon;
+import model.creator.models.FinalTree;
 import model.creator.models.HouseModel;
 import model.creator.models.PowerplantModel;
 import model.creator.models.SimpleModel;
@@ -31,15 +32,16 @@ public class Workplace extends Main{
     @Override
     public Model createModel() {
         //TODO: create model manager, return it in this method and run project to see result
-        Model model = new HouseModel();
+        Model model = new FinalTree();
         saveFile(model);
         return model;
     }
 
     @Override
     public void runAnimation() {
-        runAnimationAfter("build", 1000);
-        runAnimationAfter("destroy", 3000);
+        runAnimationAfter("build", 0);
+        runAnimationAfter("destroy", 2000);
+        //runAnimationAfter("buildTurn", 0);
         //runAnimationAfter("destroyLone", 2000);
         //runAnimationAfter("buildStraight", 1000);
         /*runAnimationAfter("destroyStraight", 2000);
